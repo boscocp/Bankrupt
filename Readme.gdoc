@@ -1,1 +1,2 @@
-Basic implementation of Bankrupt game that have 4 kind of players with 4 different basic behaviors. The game runs 300 times and provides a report the winning frequency of each kind of player.
+Basic implementation of Bankrupt game that have 4 kind of players with 4 different basic behaviors. 
+The game runs 300 times and provides a report the winning frequency of each kind of player.
