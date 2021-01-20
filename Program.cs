@@ -7,60 +7,60 @@ class Program
     static void Main(string[] args)
     {
 
-        int e = 0, c = 0, im = 0, a = 0;
-        int rodadas = 0;
+        int rigorousWins = 0, cautiousWins = 0, impulsiveWins = 0, randonWins = 0;
+        int turns = 0;
         int timeout = 0;
         for (int i = 0; i < 300; i++)
         {
-            ControladorJogo jogo = new ControladorJogo();
-            string partida = jogo.IniciarJogo();
-            if ("Exigente ganhou" == partida)
+            GameController game = new GameController();
+            string partida = game.StartGame();
+            if ("Rigorous has won" == partida)
             {
-                e++;
+                rigorousWins++;
             }
-            else if ("Cauteloso ganhou" == partida)
+            else if ("Cautious has won" == partida)
             {
-                c++;
+                cautiousWins++;
             }
-            else if ("Aleatorio ganhou" == partida)
+            else if ("Randon has won" == partida)
             {
-                a++;
+                randonWins++;
             }
-            else if ("Impulsivo ganhou" == partida)
+            else if ("Impulsive has won" == partida)
             {
-                im++;
+                impulsiveWins++;
             }
-            rodadas += jogo.GetRodadas();
-            timeout += jogo.GetTimeout();
+            turns += game.GetTurns();
+            timeout += game.GetTimeout();
         }
-        rodadas = rodadas / 300;
-        ImprimirRelatorio(e, c, im, a, rodadas, timeout);
+        turns = turns / 300;
+        ImprimirRelatorio(rigorousWins, cautiousWins, impulsiveWins, randonWins, turns, timeout);
     }
 
-    private static void ImprimirRelatorio(int e, int c, int im, int a, int rodadas, int timeout)
+    private static void ImprimirRelatorio(int e, int c, int im, int a, int turns, int timeout)
     {
-        List<Jogador> jogadoresRelatorio = new List<Jogador>();
-        Jogador impulsivo = new Impulsivo();
-        Jogador exigente = new Exigente();
-        Jogador aleatorio = new Exigente();
-        Jogador cauteloso = new Exigente();
-        impulsivo._vitorias = im;
-        exigente._vitorias = e;
-        aleatorio._vitorias = a;
-        cauteloso._vitorias = c;
-        jogadoresRelatorio.Add(impulsivo);
-        jogadoresRelatorio.Add(exigente);
-        jogadoresRelatorio.Add(aleatorio);
-        jogadoresRelatorio.Add(cauteloso);
-        List<Jogador> l = jogadoresRelatorio.OrderByDescending(x => x._vitorias).ToList();
+        List<Player> playersReport = new List<Player>();
+        Player impulsive = new Impulsive();
+        Player rigorous = new Rigorous();
+        Player randon = new Rigorous();
+        Player cautious = new Rigorous();
+        impulsive._wins = im;
+        rigorous._wins = e;
+        randon._wins = a;
+        cautious._wins = c;
+        playersReport.Add(impulsive);
+        playersReport.Add(rigorous);
+        playersReport.Add(randon);
+        playersReport.Add(cautious);
+        List<Player> l = playersReport.OrderByDescending(x => x._wins).ToList();
 
-        Console.WriteLine("Impulsivo ganhou " + im + " vezes, " + (float)im / 3.2d + "% de vitoria");
-        Console.WriteLine("Exigente ganhou " + e + " vezes " + (float)e / 3.2d + "% de vitoria");
-        Console.WriteLine("Aleatorio ganhou " + a + " vezes " + (float)a / 3.2d + "% de vitoria");
-        Console.WriteLine("Cauteloso ganhou " + c + " vezes " + (float)c / 3.2d + "% de vitoria");
-        Console.WriteLine("Media de rodadas " + rodadas);
-        Console.WriteLine("Rodadas timeout " + timeout);
-        Console.WriteLine("Jogador que mais vence " + jogadoresRelatorio[0]._nome);
+        Console.WriteLine("Impulsive has won " + im + " times, " + (float)im / 3.2d + "% of victory");
+        Console.WriteLine("Rigorous has won " + e + " vezes " + (float)e / 3.2d + "% of victory");
+        Console.WriteLine("Randon has won " + a + " vezes " + (float)a / 3.2d + "% of victory");
+        Console.WriteLine("Cautious has won " + c + " vezes " + (float)c / 3.2d + "% of victory");
+        Console.WriteLine("Average of turns: " + turns);
+        Console.WriteLine("Turns with timeout: " + timeout);
+        Console.WriteLine("player who won the most: " + playersReport[0]._name);
     }
 }
 
